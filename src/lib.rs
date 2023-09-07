@@ -249,6 +249,8 @@ cfg_if! {
         #[path = "wasi.rs"] mod imp;
     } else if #[cfg(target_os = "hermit")] {
         #[path = "hermit.rs"] mod imp;
+    } else if #[cfg(target_os = "twizzler")] {
+        #[path = "twizzler.rs"] mod imp;
     } else if #[cfg(target_os = "vxworks")] {
         mod util_libc;
         #[path = "vxworks.rs"] mod imp;
