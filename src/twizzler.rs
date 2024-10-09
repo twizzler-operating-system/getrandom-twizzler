@@ -7,9 +7,23 @@
 // except according to those terms.
 
 //! Implementation for Twizzler
+use core::{mem::MaybeUninit, num::NonZeroU32};
+
+use twizzler_abi::syscall::{sys_get_random, GetRandomError, GetRandomFlags};
+
 use crate::Error;
-use core::mem::MaybeUninit;
 
 pub fn getrandom_inner(dest: &mut [MaybeUninit<u8>]) -> Result<(), Error> {
-    todo!()
+    sys_get_random(dest, GetRandomFlags::empty()).map_err(|e| {
+
+        let err_text = 
+        match e {
+        GetRandomError::Unseeded => 
+            "Unexpected error: get_random called with blocking so it should never return if generator is unseeded."
+        ,
+        GetRandomError::InvalidArgument => 
+            "Unexpected error: all arguments should be correct."
+        };
+        panic!("{}", err_text)
+    }).map(|_|{})
 }
