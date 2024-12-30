@@ -1,3 +1,5 @@
+//! Implementation for Twizzler
+
 use core::{mem::MaybeUninit, num::NonZeroU32};
 
 use crate::Error;
@@ -11,3 +13,4 @@ pub fn getrandom_inner(mut dest: &mut [MaybeUninit<u8>]) -> Result<(), Error> {
     }
     Ok(())
 }
+

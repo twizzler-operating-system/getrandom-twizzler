@@ -210,8 +210,9 @@
 #[macro_use]
 extern crate cfg_if;
 
-use crate::util::{slice_as_uninit_mut, slice_assume_init_mut};
 use core::mem::MaybeUninit;
+
+use crate::util::{slice_as_uninit_mut, slice_assume_init_mut};
 
 mod error;
 mod util;
@@ -315,6 +316,8 @@ cfg_if! {
         #[path = "wasi.rs"] mod imp;
     } else if #[cfg(target_os = "hermit")] {
         #[path = "hermit.rs"] mod imp;
+    } else if #[cfg(target_os = "twizzler")] {
+        #[path = "twizzler.rs"] mod imp;
     } else if #[cfg(target_os = "vxworks")] {
         mod util_libc;
         #[path = "vxworks.rs"] mod imp;
@@ -345,6 +348,8 @@ cfg_if! {
                         default, you may need to enable the \"js\" feature. \
                         For more information see: \
                         https://docs.rs/getrandom/#webassembly-support");
+    } else if #[cfg(target_os="twizzler")] {
+        #[path = "twizzler.rs"] mod imp;
     } else {
         compile_error!("target is not supported, for more information see: \
                         https://docs.rs/getrandom/#unsupported-targets");
