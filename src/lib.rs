@@ -322,6 +322,8 @@ cfg_if! {
         #[path = "solid.rs"] mod imp;
     } else if #[cfg(target_os = "espidf")] {
         #[path = "espidf.rs"] mod imp;
+    } else if #[cfg(target_os="twizzler")] {
+        #[path = "twizzler.rs"] mod imp;
     } else if #[cfg(windows)] {
         #[path = "windows.rs"] mod imp;
     } else if #[cfg(all(target_arch = "x86_64", target_env = "sgx"))] {
