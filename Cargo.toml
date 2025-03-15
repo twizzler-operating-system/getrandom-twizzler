@@ -78,6 +78,9 @@ js-sys = { version = "0.3.77", default-features = false, optional = true }
 [target.'cfg(all(target_arch = "wasm32", any(target_os = "unknown", target_os = "none")))'.dev-dependencies]
 wasm-bindgen-test = "0.3"
 
+[target.'cfg(target_os = "twizzler")'.dependencies]
+twizzler-rt-abi = "0.99.0"
+
 [lints.rust.unexpected_cfgs]
 level = "warn"
 check-cfg = [
